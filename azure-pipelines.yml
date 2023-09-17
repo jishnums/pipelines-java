@@ -20,14 +20,4 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-    job: ErrorHandler
-      dependsOn: Work
-      condition: failed()
-      steps: 
-       - bash: |
-          az boards work-item create \
-         --title "Build $(build.buildNumber) failed" \
-         --type bug \
-         --org $(System.TeamFoundationCollectionUri) \
-         --project $(System.TeamProject)
 
